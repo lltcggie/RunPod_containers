@@ -22,6 +22,10 @@ RUN pip install jupyterlab
 RUN pip install ipywidgets
 RUN pip install jupyter-archive
 RUN jupyter nbextension enable --py widgetsnbextension
+RUN conda install -c conda-forge jupyter_http_over_ws -y
+RUN conda update ipython -c conda-forge -y
+RUN conda install -c conda-forge tensorflow -y
+RUN jupyter serverextension enable --py jupyter_http_over_ws
 
 ADD start.sh /
 

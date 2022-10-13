@@ -16,7 +16,14 @@ fi
 if [[ $JUPYTER_PASSWORD ]]
 then
     cd /
-    jupyter lab --allow-root --no-browser --port=8888 --ip=* --ServerApp.terminado_settings='{"shell_command":["/bin/bash"]}' --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=* --ServerApp.preferred_dir=/workspace
+    jupyter notebook \
+        --NotebookApp.allow_origin=* \
+        --port=8888 \
+        --NotebookApp.port_retries=0 \
+        --NotebookApp.token=$JUPYTER_PASSWORD \
+        --NotebookApp.notebook_dir=/workspace \
+        --NotebookApp.terminado_settings='{"shell_command":["/bin/bash"]}' \
+        --ip=* --no-browser --allow-root
 else
     sleep infinity
 fi
