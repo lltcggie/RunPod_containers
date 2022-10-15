@@ -8,8 +8,12 @@ then
     chmod 700 ~/.ssh
     cd ~/.ssh
     echo $PUBLIC_KEY >> authorized_keys
+    env | grep -v "^SHLVL=" | grep -v "^HOME=" | grep -v "^USER=" | grep -v "^LOGNAME=" | grep -v "^PWD=" | grep -v "^OLDPWD=" | \
+        grep -v "^MAIL=" | grep -v "^TERM=" | grep -v "^SHELL=" | grep -v "^_=" | grep -v "^DEBIAN_FRONTEND=" \
+        > /root/.ssh/environment
     chmod 700 -R ~/.ssh
     cd /
+    echo PermitUserEnvironment yes >> /etc/ssh/sshd_config
     service ssh start
 fi
 
